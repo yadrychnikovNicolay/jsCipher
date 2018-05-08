@@ -117,10 +117,10 @@ let decode = (cipher, key) => {
 }
 
 //generates a random 100 chars key
-let randomCipher = () => {
+let randomCipher = (nb) => {
   let text = "";
   let possible = "abcdefghijklmnopqrstuvwxyz";
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < nb; i++) {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
   return text;
@@ -152,7 +152,10 @@ let onClickDoDecode = () => {
 }
 
 let onClickGenerateRandom = () => {
+  let messageEncode = document.getElementById('messageEncode').value;
   let showGenerated = document.getElementById('showGenerated');
-  let random = randomCipher();
+  let messageEncodeArray = messageEncode.split('');
+  let nb = messageEncodeArray.length;
+  let random = randomCipher(nb);
   showGenerated.innerText = random;
 }
