@@ -1,17 +1,9 @@
-//generates a random 100 chars key
-let randomCipher = () => {
-  let text = "";
-  let possible = "abcdefghijklmnopqrstuvwxyz";
-  for (let i = 0; i < 100; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-  return text;
-}
 //array of letters
-let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' '];
 
 // encoding the message
 let encode = (message, key) => {
+  //final
   let combinedDecoded = "";
   //checks if the key is only lowercase and if its bigger or equal to the message.
   if (/^[a-z]+$/.test(key) == true && key.length >= message.length) {
@@ -20,8 +12,13 @@ let encode = (message, key) => {
     console.log(arrayMessage);
     //transforms the letters in message to numbers.
     let encodedMessage = [];
+
     for (var i = 0; i < arrayMessage.length; i++) {
-      encodedMessage.push(letters.indexOf(arrayMessage[i]));
+      // if (letters[i] == -1) {
+      //   encodedMessage[i] = " ";
+      // } else {
+        encodedMessage.push(letters.indexOf(arrayMessage[i]));
+      // }
     }
     //splits the key string letter by letter and places them in an array.
     let arrayKey = key.split('');
@@ -29,29 +26,43 @@ let encode = (message, key) => {
     //transforms the letters in key to numbers.
     let encodedKey = [];
     for (var i = 0; i < arrayMessage.length; i++) {
-      encodedKey.push(letters.indexOf(arrayKey[i]));
+      // if (letters[i] == -1) {
+      //   encodedKey[i] = " ";
+      // } else {
+        encodedKey.push(letters.indexOf(arrayKey[i]));
+      // }
     }
     //add the message ciphers to the key ciphers.
     let combinedEncoded = [];
     for (var i = 0; i < encodedMessage.length; i++) {
-      if (encodedMessage[i] + encodedKey[i] > 25) {
-        let max = Math.max(encodedMessage[i], encodedKey[i]);
-        let min = Math.min(encodedMessage[i], encodedKey[i]);
-        combinedEncoded.push(min - (25 - max) - 1);
-      } else {
-        combinedEncoded.push(encodedMessage[i] + encodedKey[i]);
+      // if (encodedMessage[i] == -1) {
+      //   combinedEncoded[i] = " ";
+      // } else {
+        if (encodedMessage[i] + encodedKey[i] > 26) {
+          let max = Math.max(encodedMessage[i], encodedKey[i]);
+          let min = Math.min(encodedMessage[i], encodedKey[i]);
+          combinedEncoded.push(min - (26 - max) - 1);
+        } else {
+          combinedEncoded.push(encodedMessage[i] + encodedKey[i]);
+        // }
       }
     }
     //putting back the encoded and combined ciphers into letters in an array.
     for (var i = 0; i < combinedEncoded.length; i++) {
-      combinedDecoded += letters[combinedEncoded[i]];
+      // if (combinedEncoded[i] == -1) {
+      //   combinedDecoded += " ";
+      // } else {
+        combinedDecoded += letters[combinedEncoded[i]];
+      // }
     }
-    return combinedDecoded;
+    // let arrayMessageLength = arrayMessage.length;
+    // return arrayMessageLength;
     //testing
-    // console.log(encodedMessage);
-    // console.log(encodedKey);
-    // console.log(combinedEncoded);
-    // console.log(combinedDecoded);
+    console.log( "encoded message " + encodedMessage);
+    console.log("encoded key " + encodedKey);
+    console.log( "combined encoded " + combinedEncoded);
+    console.log( "combined decoded " + combinedDecoded);
+    return combinedDecoded;
   } else {
     return "only lowercase and key must be equal or greater";
   }
@@ -85,7 +96,7 @@ let decode = (cipher, key) => {
       if (encodedCipher[i] - encodedKey[i] < 0) {
         let max = Math.max(encodedCipher[i], encodedKey[i]);
         let min = Math.min(encodedCipher[i], encodedKey[i]);
-        finalDecoded.push(25 - (max - min) + 1);
+        finalDecoded.push(26 - (max - min) + 1);
       } else {
         finalDecoded.push(encodedCipher[i] - encodedKey[i]);
       }
@@ -103,6 +114,16 @@ let decode = (cipher, key) => {
   } else {
     return "only lowercase and key must be equal or greater to msg";
   }
+}
+
+//generates a random 100 chars key
+let randomCipher = () => {
+  let text = "";
+  let possible = "abcdefghijklmnopqrstuvwxyz";
+  for (let i = 0; i < 30; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
 }
 
 //trigger encode with message and key from form
@@ -128,4 +149,10 @@ let onClickDoDecode = () => {
   } else {
     resultDecode.innerText = decode(messageDecode, keyDecode);
   }
+}
+
+let onClickGenerateRandom = () => {
+  let showGenerated = document.getElementById('showGenerated');
+  let random = randomCipher();
+  showGenerated.innerText = random;
 }
