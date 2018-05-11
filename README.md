@@ -5,3 +5,5 @@ To encrypt, just enter your message(doesn't handle spaces and special chars for 
 
 ## [Try it out](https://yadrychnikovnicolay.github.io/jsCipher/)
 
+I'm working on a bruteforce page, right now it doesn't work.
+
