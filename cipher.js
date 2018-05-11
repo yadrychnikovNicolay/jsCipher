@@ -1,12 +1,15 @@
 //array of letters
-let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' '];
+let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ', ',', 'é', 'è', 'ç', 'à', 'ù', 'ê', `'`, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+let lastChar = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ', ',', 'é', 'è', 'ç', 'à', 'ù', 'ê', `'`, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+let allData = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ', ',', 'é', 'è', 'ç', 'à', 'ù', 'ê', `'`, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+
 
 // encoding the message
 let encode = (message, key) => {
   //final
   let combinedDecoded = "";
   //checks if the key is only lowercase and if its bigger or equal to the message.
-  if (/^[a-z]+$/.test(key) == true && key.length >= message.length) {
+  if (/^[a-z]+$/.test(key) == true && key.length >= message.length -1) {
     //splits the message string letter by letter and places them in an array.
     let arrayMessage = message.split('');
     console.log(arrayMessage);
@@ -38,10 +41,10 @@ let encode = (message, key) => {
       // if (encodedMessage[i] == -1) {
       //   combinedEncoded[i] = " ";
       // } else {
-        if (encodedMessage[i] + encodedKey[i] > 26) {
+        if (encodedMessage[i] + encodedKey[i] > 45) {
           let max = Math.max(encodedMessage[i], encodedKey[i]);
           let min = Math.min(encodedMessage[i], encodedKey[i]);
-          combinedEncoded.push(min - (26 - max) - 1);
+          combinedEncoded.push(min - (45 - max) - 1);
         } else {
           combinedEncoded.push(encodedMessage[i] + encodedKey[i]);
         // }
@@ -73,7 +76,7 @@ let decode = (cipher, key) => {
 
   //whatever
   let compareDecoded = "";
-  if (/^[a-z]+$/.test(key) == true && key.length >= cipher.length) {
+  if (/^[a-z]+$/.test(key) == true && key.length >= cipher.length -1) {
     //same as encode()
     let arrayCipher = cipher.split('');
     console.log(arrayCipher);
@@ -96,7 +99,7 @@ let decode = (cipher, key) => {
       if (encodedCipher[i] - encodedKey[i] < 0) {
         let max = Math.max(encodedCipher[i], encodedKey[i]);
         let min = Math.min(encodedCipher[i], encodedKey[i]);
-        finalDecoded.push(26 - (max - min) + 1);
+        finalDecoded.push(45 - (max - min) + 1);
       } else {
         finalDecoded.push(encodedCipher[i] - encodedKey[i]);
       }
@@ -152,10 +155,37 @@ let onClickDoDecode = () => {
 }
 
 let onClickGenerateRandom = () => {
+  let keyEncode = document.getElementById('keyEncode').value;
   let messageEncode = document.getElementById('messageEncode').value;
   let showGenerated = document.getElementById('showGenerated');
   let messageEncodeArray = messageEncode.split('');
   let nb = messageEncodeArray.length;
   let random = randomCipher(nb);
   showGenerated.innerText = random;
+  keyEncode += random;
 }
+
+let onClickShowLetters = () => {
+  let showLetters = document.getElementById('showLetters');
+  let buttonShowLetters = document.getElementById('buttonShowLetters');
+  showLetters.innerText = letters ;
+  showLetters.classList.toggle("invisible");
+}
+
+
+
+// let onClickBruteforce = () => {
+//   let messageToBruteforce = document.getElementById('messageToBruteforce').value;
+//   let buttonToBruteforce = document.getElementById('buttonToBruteforce');
+//   let results = document.getElementById('results');
+//   let arrayToBruteforce = messageToBruteforce.split("");
+//   let temporaryArray = [];
+//   for (var i = 0; i < lastChar.length; i++) {
+//     for (var j = 0; j < letters.length; j++) {
+//       let r = this.lastChar[i] + this.letters[j];
+//       temporaryArray.push(r);
+//     }
+//   }
+//   this.lastChar = temporaryArray;
+//   this.allData = this.allData.concat(this.lastChar);
+// }

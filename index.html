@@ -4,10 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <title>cipher</title>
 </head>
 <body>
   <h1>cipherzorxxxxxffffffffffffff</h1>
+  <div>
+    <span id="showLetters" class="invisible"></span>
+    <br>
+    <button id="buttonShowLetters" type="button" name="button" onclick="onClickShowLetters()">show supported chars</button>
+  </div>
   <h2>ENCODE</h2>
   <div id="encode">
     <form class="" action="index.html" method="post">
@@ -30,7 +36,8 @@
         Generated key: <span id="showGenerated"></span>
       </div>
       <br>
-      <span id="resultEncode">result of encoding:</span>
+      result of encoding:
+      <span id="resultEncode"></span>
       <br>
     </form>
   </div>
@@ -48,12 +55,13 @@
       <br>
       <button id="buttonDecode" onclick="onClickDoDecode()" type="button" name="button">decode</button>
       <br>
-      <span id="resultDecode">result of decoding:</span>
+      result of decoding:
+      <span id="resultDecode"></span>
     </form>
     </form>
   </div>
-
-
+  <br>
+  <a href="bruteforce.html">bruteforce</a>
 
   <script src="cipher.js">
 
