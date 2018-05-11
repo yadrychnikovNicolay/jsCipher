@@ -1,7 +1,6 @@
 //array of letters
 let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ', ',', 'é', 'è', 'ç', 'à', 'ù', 'ê', `'`, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-let lastChar = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ', ',', 'é', 'è', 'ç', 'à', 'ù', 'ê', `'`, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-let allData = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ', ',', 'é', 'è', 'ç', 'à', 'ù', 'ê', `'`, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+
 
 
 // encoding the message
@@ -137,7 +136,7 @@ let onClickDoEncode = () => {
   if (messageEncode == "" || keyEncode == "") {
     console.log("enter something");
   } else {
-      resultEncode.innerText = encode(messageEncode, keyEncode);
+      resultEncode.value = encode(messageEncode, keyEncode);
       console.log("encoded")
   }
 }
@@ -155,14 +154,14 @@ let onClickDoDecode = () => {
 }
 
 let onClickGenerateRandom = () => {
-  let keyEncode = document.getElementById('keyEncode').value;
+  let keyEncode = document.getElementById('keyEncode');
   let messageEncode = document.getElementById('messageEncode').value;
   let showGenerated = document.getElementById('showGenerated');
   let messageEncodeArray = messageEncode.split('');
   let nb = messageEncodeArray.length;
   let random = randomCipher(nb);
-  showGenerated.innerText = random;
-  keyEncode += random;
+  showGenerated.value = random;
+  keyEncode.value = random;
 }
 
 let onClickShowLetters = () => {
