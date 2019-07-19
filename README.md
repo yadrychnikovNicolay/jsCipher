@@ -4,6 +4,3 @@ It's a [Vigenère cipher](http://crypto.interactive-maths.com/vigenegravere-ciph
 To encrypt, just enter your message(there is a button to show all the supported chars) and your key(or generate it randomly) and click on encrypt, it will divide each letter in the message and the key into an array of letters and then add them together. To decrypt, paste the encrypted message you got and enter the same key you used.
 
 ## [Try it out](https://yadrychnikovnicolay.github.io/jsCipher/)
-
-I'm working on a bruteforce page, right now it doesn't work. (it's been 4 months, im lazy)
-
